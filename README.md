@@ -52,5 +52,9 @@ Start a new OpenClaw turn after cloning or updating the pack.
 python3 skills/vietqr/scripts/vietqr.py --bank VCB --account 0123456789 --amount 150000 --note "thanh toan"
 python3 skills/vietqr/scripts/vietqr.py --bank VCB --account 0123456789 --amount 25K --note "thanh toan"
 python3 skills/vietqr/scripts/vietqr.py --bank VCB --account 0123456789 --amount 2.5k --note "thanh toan"
+python3 skills/vietqr/scripts/vietqr.py --bank BIDV --account 0123456789 --amount 50000 --note "test"
+python3 skills/vietqr/scripts/vietqr.py --bank VPB --account 0123456789 --amount 50000 --note "test"
 python3 skills/shopee-checker/scripts/url_parser.py "https://shopee.vn/ao-thun-basic-i.12345678.987654321" --json
 ```
+
+Supported VietQR bank aliases now include many common VN banks, for example: `mb`, `vcb`, `ctg`, `bidv`, `agb`, `tcb`, `acb`, `tpb`, `vpb`, `stb`, `hdb`, `vib`, `ocb`, `shb`, `msb`, `sea`, `eib`, `ab`, `pvb`, `nab`, `bab`, `lpb`, `klb`, and `vab`.

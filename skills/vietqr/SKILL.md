@@ -19,7 +19,7 @@ Optional flags:
 - `--template <template>` (default: `compact2`)
 - `--markdown` (print `![VietQR](...)`)
 
-Bank aliases already handled by the script include `mb`, `MBBank`, `vcb`, `Vietcombank`, `tcb`, `Techcombank`, `acb`, `tpb`, and `TPBank`.
+Bank aliases already handled by the script include common shortcuts for many Vietnam banks, such as `mb`, `vcb`, `ctg`, `bidv`, `agb`, `tcb`, `acb`, `tpb`, `vpb`, `stb`, `hdb`, `vib`, `ocb`, `shb`, `msb`, `sea`, `eib`, `ab`, `pvb`, `nab`, `bab`, `lpb`, `klb`, and `vab`.
 
 Workflow:
 
