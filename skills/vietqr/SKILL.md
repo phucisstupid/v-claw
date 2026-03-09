@@ -14,17 +14,19 @@ python3 "{baseDir}/scripts/vietqr.py" --bank <bank> --account <account>
 Optional flags:
 
 - `--amount <positive_int|k_suffix>` (examples: `10000`, `10k`, `25K`, `2.5k`)
+- `--amount <vn_amount>` also supports Vietnamese shorthand and separators (examples: `200.000`, `1,5tr`, `2tr`, `50k`, `500kđ`)
 - `--note "<transfer note>"`
 - `--account-name "<account holder>"`
 - `--template <template>` (default: `compact2`)
 - `--markdown` (print `![VietQR](...)`)
+- `--list-banks` (print built-in bank aliases like `vcb`, `mb`, `bidv`, `vietinbank`)
 
 Workflow:
 
 1. Ask only for the missing bank, account, amount, or note fields needed for the user's request.
 2. Normalize human input before calling the script.
-   - Convert shorthand amounts like `10k`, `25K`, or `2.5k` into whole VND amounts.
-   - Translate common bank nicknames or abbreviations into the bank string the script should receive.
+   - Convert shorthand amounts like `10k`, `2.5k`, `1,5tr`, `2tr`, or `200.000` into whole VND amounts.
+   - Translate common bank nicknames or abbreviations (including Vietnamese forms with accents) into the bank string the script should receive.
    - Prefer using a clear official bank name when there is any ambiguity.
 3. Run the script instead of hand-building the URL.
 4. Return the generated URL directly, or the markdown image form when the user wants something they can paste into chat/docs.
