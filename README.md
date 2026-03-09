@@ -46,11 +46,18 @@ examples/
 ## Current status
 
 - [x] project scaffold
-- [x] VietQR module v0
+- [x] VietQR module v1 (input validation + common VN bank aliases)
 - [ ] VietQR OpenClaw skill/plugin wrapper
-- [ ] Shopee checker
+- [x] Shopee URL parser
 - [ ] Lazada checker
 - [ ] compare command
+
+## Download
+
+```bash
+git clone https://github.com/phucisstupid/vietnam-claw.git
+cd vietnam-claw
+```
 
 ## Quick start
 
@@ -58,10 +65,54 @@ examples/
 python3 plugins/vietqr/vietqr.py --bank MBBank --account 0123456789 --amount 50000 --note "cafe"
 ```
 
+## Local usage
+
+VietQR:
+
+```bash
+python3 plugins/vietqr/vietqr.py --bank VCB --account 0123456789 --amount 150000 --note "thanh toan don hang"
+```
+
+Shopee parser:
+
+```bash
+python3 plugins/shopee/url_parser.py "https://shopee.vn/ao-thun-basic-i.12345678.987654321"
+```
+
 ## Example output
 
 ```text
 https://img.vietqr.io/image/MBBank-0123456789-compact2.png?amount=50000&addInfo=cafe
+```
+
+## VietQR aliases
+
+Supported aliases include:
+
+- `MBBank` / `mb`
+- `Vietcombank` / `VCB`
+- `Techcombank` / `TCB`
+- `ACB`
+- `TPBank` / `TPB`
+
+Example:
+
+```bash
+python3 plugins/vietqr/vietqr.py --bank VCB --account 0123456789 --amount 150000 --note "thanh toan don hang"
+```
+
+## Shopee URL parser
+
+Parse product URL metadata (shop id, item id, slug when available):
+
+```bash
+python3 plugins/shopee/url_parser.py "https://shopee.vn/ao-thun-basic-i.12345678.987654321"
+```
+
+JSON output:
+
+```bash
+python3 plugins/shopee/url_parser.py "https://shopee.vn/product/12345678/987654321" --json
 ```
 
 ## Notes
