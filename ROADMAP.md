@@ -1,22 +1,32 @@
 # Vietnam Claw Roadmap
 
-## Shipped now
+## Stable core shipped now
 
 - `vietqr`: stable local VietQR URL builder with VN amount shorthand parsing
-- `shopee-checker`: stable local Shopee URL metadata parser
-- `bill-split-vn`: v1 equal-split calculator with uneven paid amounts and settlements
-- `lazada-checker`: v1 Lazada URL parser (product IDs/slug/market + short-link metadata)
-- `price-compare-vn`: v1 best-effort offer normalizer + cheapest VND offer picker
-- `receipt-parser-vn`: v1 text-first receipt parser (items/qty/subtotal/VAT/service/total heuristics)
+- `bill-split-vn`: stable local split/settlement logic
+- `receipt-parser-vn`: stable text-first receipt parser (heuristic, no OCR)
+- `vn-phone`: stable VN phone normalization and validation
+- `public-holiday-vn`: VN holiday lookup from no-key public holiday API with upcoming filter
+- `viet-geo`: offline VN province/city normalization and metadata matching from bundled public dataset
+- `weather-vn`: VN weather forecasts using no-key Open-Meteo geocoding + forecast APIs
+
+## Lower-priority best-effort skills
+
+- `shopee-checker`: local URL parser only
+- `lazada-checker`: local URL parser only
+- `price-compare-vn`: compares provided metadata/prices only; no live scraping/fetch
+
+These marketplace skills remain supported, but reliability-first roadmap work now prioritizes durable VN utilities over scraping-oriented expansion.
 
 ## Next priorities
 
-- Add compact fixture-based CLI tests for each skill (happy path + edge/failure).
-- Improve receipt parsing heuristics for noisy OCR and multiline item names.
-- Add optional richer normalization fields for comparison outputs (shipping, voucher, final paid).
+- Add fixture-based CLI tests for all stable-core skills (happy path + failure path).
+- Add lightweight response caching for API-backed skills (`public-holiday-vn`, `weather-vn`) to improve degraded-mode usability.
+- Expand `viet-geo` metadata fields with official codes and citation metadata.
+- Improve receipt parsing for noisy OCR text while keeping deterministic output schema.
 
-## Best-effort boundaries
+## Reliability boundaries
 
-- `lazada-checker` and `shopee-checker`: no network expansion of short links.
-- `price-compare-vn`: no live scraping/API fetch; compares only provided metadata/prices.
-- `receipt-parser-vn`: no image OCR in v1; text parsing is heuristic and must be verified.
+- API-backed skills (`public-holiday-vn`, `weather-vn`) depend on upstream availability and network.
+- `receipt-parser-vn` is heuristic text parsing and must be verified against source receipts.
+- Marketplace skills are intentionally best-effort and do not perform scraping in v1.

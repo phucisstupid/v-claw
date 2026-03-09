@@ -1,19 +1,30 @@
 # vietnam-claw
 
-`vietnam-claw` is a small OpenClaw Vietnam skill pack. Clone it into an OpenClaw workspace, or point OpenClaw at its `skills/` directory, and the bundled skills are ready to use.
+`vietnam-claw` is an OpenClaw Vietnam skill pack focused on durable Vietnam-first workflows built from open APIs, public data, or reliable local logic.
 
-## Included skills
+## Stable core (prioritized)
 
-- `vietqr`: build VietQR payment image URLs from bank, account, amount, and note details
-- `shopee-checker`: parse Shopee product URLs into `shop_id`, `item_id`, slug, host, and related metadata
-- `bill-split-vn`: split bill totals across participants and generate settlement transfers
-- `lazada-checker`: parse Lazada URLs and extract item/seller identifiers and metadata
-- `price-compare-vn`: compare best-effort offers from VN marketplace URLs and normalized metadata
-- `receipt-parser-vn`: parse OCR-pasted/text receipts into structured merchant/item/total fields
+- `vietqr`: stable local VietQR payment URL builder
+- `bill-split-vn`: stable local bill split + settlement calculator
+- `receipt-parser-vn`: stable text-first receipt parser
+- `vn-phone`: stable VN phone normalization/validation
+- `public-holiday-vn`: Vietnam public holiday lookup (no-key public API)
+- `viet-geo`: offline VN province/city normalization + metadata match
+- `weather-vn`: Vietnam weather lookup via no-key Open-Meteo APIs
+
+## Best-effort / lower priority
+
+Marketplace-facing skills remain available but are de-emphasized for core reliability:
+
+- `shopee-checker`
+- `lazada-checker`
+- `price-compare-vn`
+
+These are still useful for URL parsing and metadata shaping, but live commerce data collection/scraping is intentionally out of scope.
 
 ## Roadmap
 
-See [ROADMAP.md](ROADMAP.md) for current shipped status, next priorities, and explicit best-effort limits.
+See [ROADMAP.md](ROADMAP.md) for shipped status, priority direction, and explicit best-effort limits.
 
 ## Clone
 
@@ -46,13 +57,15 @@ Start a new OpenClaw turn after cloning or updating the pack.
 
 ```bash
 python3 skills/vietqr/scripts/vietqr.py --bank VCB --account 0123456789 --amount 150000 --note "thanh toan"
-python3 skills/vietqr/scripts/vietqr.py --bank VCB --account 0123456789 --amount 25K --note "thanh toan"
-python3 skills/vietqr/scripts/vietqr.py --bank VCB --account 0123456789 --amount 2.5k --note "thanh toan"
-python3 skills/shopee-checker/scripts/url_parser.py "https://shopee.vn/ao-thun-basic-i.12345678.987654321" --json
 python3 skills/bill-split-vn/scripts/bill_split.py --total 450000 --people "An,Binh,Chi" --paid "An=450000" --json
-python3 skills/lazada-checker/scripts/url_parser.py "https://www.lazada.vn/products/sample-i123456789-s987654321.html" --json
-python3 skills/price-compare-vn/scripts/compare.py --input "https://shopee.vn/product/123456/999999" --input '{"marketplace":"lazada","url":"https://www.lazada.vn/products/i123456789-s987654321.html","price":189000}' --json
 python3 skills/receipt-parser-vn/scripts/receipt_parser.py --text $'CHAO CAFE\nTra dao 35.000\nBanh mi 50.000\nTong cong 85.000' --json
+python3 skills/vn-phone/scripts/vn_phone.py "0909 123 456" --json
+python3 skills/public-holiday-vn/scripts/public_holiday_vn.py --year 2026 --from-date 2026-03-10 --limit 5 --json
+python3 skills/viet-geo/scripts/viet_geo.py --query "tp hcm" --json
+python3 skills/weather-vn/scripts/weather_vn.py --location "Da Nang" --days 3 --json
 ```
 
-For agent use, keep the script simple and let the skill normalize human phrasing first, such as bank nicknames and shorthand amounts like `10k`.
+Notes:
+
+- `viet-geo` works fully offline from bundled public data.
+- `public-holiday-vn` and `weather-vn` require live network access to their no-key public APIs.
