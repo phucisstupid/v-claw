@@ -19,12 +19,17 @@ Optional flags:
 - `--template <template>` (default: `compact2`)
 - `--markdown` (print `![VietQR](...)`)
 
-Bank aliases already handled by the script include common shortcuts for many Vietnam banks, such as `mb`, `vcb`, `ctg`, `bidv`, `agb`, `tcb`, `acb`, `tpb`, `vpb`, `stb`, `hdb`, `vib`, `ocb`, `shb`, `msb`, `sea`, `eib`, `ab`, `pvb`, `nab`, `bab`, `lpb`, `klb`, and `vab`.
-
 Workflow:
 
 1. Ask only for the missing bank, account, amount, or note fields needed for the user's request.
-2. Run the script instead of hand-building the URL.
-3. Return the generated URL directly, or the markdown image form when the user wants something they can paste into chat/docs.
+2. Normalize human input before calling the script.
+   - Convert shorthand amounts like `10k`, `25K`, or `2.5k` into whole VND amounts.
+   - Translate common bank nicknames or abbreviations into the bank string the script should receive.
+   - Prefer using a clear official bank name when there is any ambiguity.
+3. Run the script instead of hand-building the URL.
+4. Return the generated URL directly, or the markdown image form when the user wants something they can paste into chat/docs.
+5. For chat surfaces that do not render markdown images inline, prefer returning the raw URL.
+
+Keep the script layer small and predictable. Do not rely on the script to understand every human shorthand if the agent can normalize it first.
 
 If the script exits with `Invalid input: ...`, return that reason clearly and ask only for the incorrect field.
