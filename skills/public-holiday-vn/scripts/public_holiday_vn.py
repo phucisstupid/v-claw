@@ -19,7 +19,7 @@ def _parse_date(value: str) -> dt.date:
 
 def _fetch_json(url: str, timeout: float = 10.0) -> object:
     request_headers = {
-        "User-Agent": "vietnam-claw-public-holiday-vn/1.0",
+        "User-Agent": "v-claw-public-holiday-vn/1.0",
         "Accept": "application/json",
     }
     from urllib.request import Request

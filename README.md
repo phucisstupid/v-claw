@@ -1,6 +1,6 @@
-# vietnam-claw
+# v-claw
 
-`vietnam-claw` is an OpenClaw Vietnam skill pack focused on durable Vietnam-first workflows built from open APIs, public data, or reliable local logic.
+`v-claw` is an OpenClaw Vietnam skill pack focused on durable Vietnam-first workflows built from open APIs, public data, or reliable local logic.
 
 ## Included skills
 
@@ -37,10 +37,10 @@ If you want another agent to install this pack for you, copy-paste this directly
 Install the Vietnam skill pack from https://github.com/phucisstupid/v-claw.git into my OpenClaw setup.
 
 Do this automatically if you have file access:
-1. Clone the repo to ~/Documents/vietnam-claw if it does not exist.
+1. Clone the repo to ~/v-claw if it does not exist.
 2. If it already exists, update it with git pull --ff-only.
 3. Ensure ~/.openclaw/openclaw.json exists.
-4. Add ~/Documents/vietnam-claw/skills to skills.load.extraDirs if it is missing.
+4. Add ~/v-claw/skills to skills.load.extraDirs if it is missing.
 5. Preserve any existing config entries and avoid duplicate paths.
 6. Tell me when installation is complete.
 
@@ -60,8 +60,8 @@ Expected agent behavior:
 Clone the repo anywhere, then load it via OpenClaw config:
 
 ```bash
-git clone https://github.com/phucisstupid/v-claw.git ~/Documents/vietnam-claw
-cd ~/Documents/vietnam-claw
+git clone https://github.com/phucisstupid/v-claw.git ~/v-claw
+cd ~/v-claw
 ```
 
 Add this to `~/.openclaw/openclaw.json`:
@@ -71,7 +71,7 @@ Add this to `~/.openclaw/openclaw.json`:
   "skills": {
     "load": {
       "extraDirs": [
-        "/absolute/path/to/vietnam-claw/skills"
+        "/absolute/path/to/v-claw/skills"
       ]
     }
   }
