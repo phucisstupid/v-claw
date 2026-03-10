@@ -2,18 +2,15 @@
 
 `vietnam-claw` is an OpenClaw Vietnam skill pack focused on durable Vietnam-first workflows built from open APIs, public data, or reliable local logic.
 
-## Stable core
+## Included skills
 
-- `vietqr`: stable local VietQR payment URL builder
-- `bill-split-vn`: stable local bill split + settlement calculator
-- `receipt-parser-vn`: stable text-first receipt parser
-- `vn-phone`: stable VN phone normalization/validation
-- `public-holiday-vn`: Vietnam public holiday lookup (no-key public API)
-- `viet-geo`: offline VN province/city normalization + metadata match
-- `fuel-price-vn`: Vietnam fuel price snapshot from a public no-key source
-
-## New utility skills
-
+- `vietqr`
+- `bill-split-vn`
+- `receipt-parser-vn`
+- `vn-phone`
+- `public-holiday-vn`
+- `viet-geo`
+- `fuel-price-vn`
 - `gold-price-vn`
 - `bank-rate-vn`
 - `interest-rate-vn`
@@ -26,29 +23,19 @@
 - `telecom-vn`
 - `food-calorie-vn`
 
-## Removed marketplace skills
-
-These were intentionally removed from the pack:
-
-- `shopee-checker`
-- `lazada-checker`
-- `price-compare-vn`
-
 ## Roadmap
 
-See [ROADMAP.md](ROADMAP.md) for shipped status, priority direction, and explicit best-effort limits.
+See [ROADMAP.md](ROADMAP.md) for priority direction and best-effort limits.
 
 ## Install for OpenClaw
 
-OpenClaw loads skills from `<workspace>/skills` and from any extra directories configured in `~/.openclaw/openclaw.json`.
+OpenClaw loads skills from `<workspace>/skills` and from extra directories configured in `~/.openclaw/openclaw.json`.
 
-### Option A — easiest: clone into the active OpenClaw workspace
+### Option A — clone into the active OpenClaw workspace
 
 If this repo lives directly inside the active OpenClaw workspace and the skills are under `<workspace>/skills`, no extra config is needed.
 
-### Option B — recommended when keeping the repo outside the workspace
-
-Clone the repo anywhere, then point OpenClaw at its `skills/` directory in config.
+### Option B — keep the repo anywhere and load it via config
 
 ```bash
 git clone https://github.com/phucisstupid/vietnam-claw.git
@@ -69,46 +56,35 @@ Add this to `~/.openclaw/openclaw.json`:
 }
 ```
 
-Then start a new OpenClaw turn after cloning or updating the pack.
+Start a new OpenClaw turn after cloning or updating the pack.
 
-## Agent install recipe
+## Copy-paste prompt for an agent
 
-If an OpenClaw agent is asked to install this pack, it should not ask the user to do the wiring manually if it already has file access.
+If you want another agent to install this pack for you, copy-paste this directly:
 
-Preferred workflow for the agent:
+```text
+Install the Vietnam skill pack from https://github.com/phucisstupid/v-claw.git into my OpenClaw setup.
+
+Do this automatically if you have file access:
+1. Clone the repo to ~/Documents/vietnam-claw if it does not exist.
+2. If it already exists, update it with git pull --ff-only.
+3. Ensure ~/.openclaw/openclaw.json exists.
+4. Add ~/Documents/vietnam-claw/skills to skills.load.extraDirs if it is missing.
+5. Preserve any existing config entries and avoid duplicate paths.
+6. Tell me when installation is complete.
+
+Do not ask me to edit the config manually unless you truly cannot access the file.
+```
+
+## Agent install behavior
+
+If an agent is asked to install this pack and already has file access, it should:
 
 1. Clone or update the repo locally.
 2. Ensure `~/.openclaw/openclaw.json` exists.
 3. Add the repo's `skills/` path to `skills.load.extraDirs` if missing.
 4. Avoid duplicating the same path.
-5. Tell the user the pack is ready and that a new turn/restart may be needed for skill discovery.
-
-Concrete example:
-
-```bash
-mkdir -p ~/.openclaw
-if [ ! -d ~/Documents/vietnam-claw/.git ]; then
-  git clone https://github.com/phucisstupid/vietnam-claw.git ~/Documents/vietnam-claw
-else
-  git -C ~/Documents/vietnam-claw pull --ff-only
-fi
-```
-
-If the config file does not exist, create:
-
-```json
-{
-  "skills": {
-    "load": {
-      "extraDirs": [
-        "/Users/<you>/Documents/vietnam-claw/skills"
-      ]
-    }
-  }
-}
-```
-
-If the config file already exists, merge this path into `skills.load.extraDirs` rather than replacing existing entries.
+5. Tell the user the pack is ready and that a new turn or restart may be needed for skill discovery.
 
 ## Quick checks
 
